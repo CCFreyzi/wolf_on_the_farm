@@ -12,6 +12,9 @@ import {
 } from "./wolf_images";
 import {BrokenEgsContainer, Egg, EggContainer, GameContainer, LifeEgg, Score} from "./components_styled";
 import GameOverComponent from "./game_over_render";
+import {useDayTimeChanges} from "../hooks/use_day_time_changes"
+
+
 
 const Game = () => {
     const [score, setScore] = useState(0);
@@ -25,11 +28,8 @@ const Game = () => {
     const [newEggTimeOutId, setNewTimeOutId] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
     const [timeOutsIds, setTimeOutsIds] = useState([]);
-    const [backgroundImage, setBackgroundImage] = useState(0);
 
-    useEffect(() => {
-        setInterval(() => setBackgroundImage(prevVal => Number(!prevVal)), 300)
-    }, []);
+    const {dateTime} = useDayTimeChanges({setScore, setBrokenScale});
 
     useEffect(() => {
         if (!brokenScale && availableEggs.length) {
@@ -133,7 +133,7 @@ const Game = () => {
         }
     }, []);
 
-    return <GameContainer backgroundImage={`./background_${backgroundImage}.svg`}>
+    return <GameContainer backgroundImage={`./background_${dateTime}.svg`}>
         <WolfLeftUp isDisplay={wolfPosition === EGG_POSITION_KEYS.q}/>
         <WolfRightUp isDisplay={wolfPosition === EGG_POSITION_KEYS.e}/>
         <WolfLeftDown isDisplay={wolfPosition === EGG_POSITION_KEYS.a}/>
