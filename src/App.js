@@ -2,8 +2,8 @@ import MainPage from "./components/main";
 
 function App() {
   return (
-      <spab>{'coming soon....'}</spab>
-      // <MainPage/>
+      // <spab>{'coming soon....'}</spab>
+      <MainPage/>
   );
 }
 
